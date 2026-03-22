@@ -81,7 +81,8 @@ export class CustomerAuthController {
                         "secret_code": "1237",
                         "status": "pending"
                     }
-                ]
+                ],
+                deviceRemoveStatus: true
             }
         );
     };

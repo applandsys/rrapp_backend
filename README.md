@@ -6,7 +6,7 @@
  "com.rrapp/.MyDeviceAdminReceiver",
 
  "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION":
- "https://yourserver.com/rrapp.apk",
+ "https://trvnx.com/rrapp.apk",
 
  "android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_CHECKSUM":
  "BASE64_CHECKSUM",
