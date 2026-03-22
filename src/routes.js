@@ -4,6 +4,7 @@ import customerRoutes from "./modules/customer/customer.route.js";
 import companyRoutes from "./modules/core/company/company.routes.js";
 
 import orderRoutes from "./modules/order/order.routes.js";
+import path from "path";
 
 // Helper function for RESTful routes
 export default function routes(app) {
@@ -17,6 +18,10 @@ export default function routes(app) {
             message: 'RRAPP Backend SERVER is Running'
         })
     });
+
+    app.get("/download", (req, res) => {
+        res.download(path.join(__dirname, "../public/rrapp.apk"))
+    })
 
     app.use("/api/auth", authRoutes);
     app.use("/api/users", userRoutes);
