@@ -38,6 +38,7 @@ app.get("/health", (req, res) => {
 /* ======================
    Global Error Handler
 ====================== */
+app.use(express.static('public'));
 app.use(errorHandler);
 
 export default app;
