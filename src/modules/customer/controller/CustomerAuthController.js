@@ -32,7 +32,7 @@ export class CustomerAuthController {
                     "total_amount": 5000,
                     "due_amount": 4000,
                     "paid_amount": 1000,
-                    "status": "pending",
+                    "status": "paid",
                     "type": "buy",
                     items: [{
                         "id": 1,
@@ -52,7 +52,7 @@ export class CustomerAuthController {
                         "due_amount": 4000,
                         "due_date": "2026-03-22",
                         "secret_code": "1234",
-                         "status": "pending"
+                        "status": "paid"
                     },
                     {
                         "id": 2,
@@ -61,7 +61,7 @@ export class CustomerAuthController {
                         "due_date": "2026-03-25",
                         "due_amount": 3000,
                         "secret_code": "1235",
-                        "status": "pending"
+                        "status": "paid"
                     },
                     {
                         "id": 3,
@@ -70,7 +70,7 @@ export class CustomerAuthController {
                         "due_date": "2026-03-25",
                         "due_amount": 2000,
                         "secret_code": "1236",
-                        "status": "pending"
+                        "status": "paid"
                     },
                     {
                         "id": 4,
@@ -79,10 +79,10 @@ export class CustomerAuthController {
                         "due_date": "2026-03-29",
                         "due_amount": 1000,
                         "secret_code": "1237",
-                        "status": "pending"
+                        "status": "paid"
                     }
                 ],
-                deviceRemoveStatus: true
+                deviceAdminStatus: true
             }
         );
     };

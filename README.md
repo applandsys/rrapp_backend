@@ -123,3 +123,13 @@ POST {
 http://locahost:5000/api/customer/login
 ```
 
+
+
+### LIFECYCLE
+1. App install with QR CODE so that it have DEVICE ADMIN/WONER
+2. Submit a License Key in the App input  : Sync all Customer + Order Data -> Installment data from the API response
+3. Data need to save in app database.
+4. Data need to sync in every 1hour interval if net exist
+5. If any due_date from the api response passed the current date and the status: "unpaid" then "Lock screen" and app automatically opened on the screen
+6. OTP unlock support the otp is stored in the api response data with the installment information 
+7. if the api response deviceAdminStatus: false then "Device Admin Disabled" otherwise "Device Admin Enabled" or if all installment is paid then "Device Admin Disabled"
