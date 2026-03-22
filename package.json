@@ -1,0 +1,44 @@
+{
+  "name": "rrapp_backend",
+  "version": "1.0.0",
+  "description": "Shop keepers installment management erp",
+  "keywords": [
+    "sell",
+    "manage",
+    "pos",
+    "installment"
+  ],
+  "license": "ISC",
+  "author": "Tarique Mosharraf",
+  "type": "module",
+  "imports": {
+    "@/*": "./src/*"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "migrate": "node src/scripts/database/migrate.js",
+    "make:migration": "node src/scripts/database/make-migration.js",
+    "migrate:rollback": "node src/scripts/database/rollback.js",
+    "make:model": "node src/scripts/database/make-model.js",
+    "db:seed": "node src/scripts/database/seed.js",
+    "start:dev": "nodemon"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "morgan": "^1.10.1",
+    "multer": "^1.4.5-lts.2",
+    "pg": "^8.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
