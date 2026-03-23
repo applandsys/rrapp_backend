@@ -4,6 +4,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import routes from "./routes.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
+import path from "path";
 
 const app = express();
 
@@ -38,6 +39,13 @@ app.get("/health", (req, res) => {
 /* ======================
    Global Error Handler
 ====================== */
+app.use(express.static("../public", {
+    setHeaders: (res, path) => {
+        if (path.endsWith(".apk")) {
+            res.setHeader("Content-Type", "application/vnd.android.package-archive")
+        }
+    }
+}))
 app.use(errorHandler);
 
 export default app;

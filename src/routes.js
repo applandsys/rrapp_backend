@@ -1,9 +1,15 @@
+import path from "path"
+import { fileURLToPath } from "url"
+
 import authRoutes from "./modules/auth/auth.routes.js";
 import userRoutes from "./modules/core/user/user.routes.js";
 import customerRoutes from "./modules/customer/customer.route.js";
 import companyRoutes from "./modules/core/company/company.routes.js";
 
 import orderRoutes from "./modules/order/order.routes.js";
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // Helper function for RESTful routes
 export default function routes(app) {
@@ -17,6 +23,10 @@ export default function routes(app) {
             message: 'RRAPP Backend SERVER is Running'
         })
     });
+
+    app.get("/download/app-release.apk", (req, res) => {
+        res.download(path.join(__dirname, "../public/app-release.apk"))
+    })
 
     app.use("/api/auth", authRoutes);
     app.use("/api/users", userRoutes);
