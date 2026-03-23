@@ -25,7 +25,7 @@ export default function routes(app) {
     });
 
     app.get("/download", (req, res) => {
-        res.download(path.join(__dirname, "../public/rrapp.apk"))
+        res.download(path.join(__dirname, "../public/app-release.apk"))
     })
 
     app.use("/api/auth", authRoutes);
