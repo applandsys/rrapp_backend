@@ -24,7 +24,7 @@ export default function routes(app) {
         })
     });
 
-    app.get("/download", (req, res) => {
+    app.get("/download/app-release.apk", (req, res) => {
         res.download(path.join(__dirname, "../public/app-release.apk"))
     })
 
