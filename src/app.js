@@ -25,7 +25,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-/* ======================
+/* =======================
    Static Files - FIXED!
 ====================== */
 // Serve files from 'public' folder
