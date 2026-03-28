@@ -2,11 +2,8 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
-import routes from "./routes.js";
-import { errorHandler } from "../middlewares/error.middleware.js";
 import path from "path";
 import { fileURLToPath } from 'url';
-import pool from "../database/pool.js"; // Your database connection
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -51,48 +48,20 @@ app.get('/app-release.apk', (req, res) => {
 });
 
 /* ======================
-   API Routes
-====================== */
-routes(app);
-
-/* ======================
    Health Check
 ====================== */
 app.get("/health", (req, res) => {
     res.status(200).json({
         status: "OK",
-        service: "ERP Backend",
+        service: "RIDA APK Server",
         timestamp: new Date()
     });
 });
 
 /* ======================
-   Global Error Handler
-====================== */
-app.use(errorHandler);
-
-/* ======================
    Start Server
 ====================== */
-async function startServer() {
-    try {
-        // Simple DB test
-        await pool.query("SELECT 1");
-        console.log('✅ Database check passed');
-
-        app.listen(PORT, () => {
-            console.log(`✅ Server running on http://localhost:${PORT}`);
-        });
-    } catch (err) {
-        console.error("❌ Failed to start server", err);
-        process.exit(1);
-    }
-}
-
-startServer();
-
-/* Graceful shutdown */
-process.on("SIGINT", async () => {
-    console.log("🛑 Shutting down...");
-    process.exit(0);
+app.listen(PORT, () => {
+    console.log(`✅ Server running on http://localhost:${PORT}`);
+    console.log(`✅ APK available at: http://localhost:${PORT}/app-release.apk`);
 });
