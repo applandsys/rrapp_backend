@@ -5,11 +5,16 @@ import helmet from "helmet";
 import routes from "./routes.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 import path from "path";
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use(express.json());            // ✅ parse JSON body
-app.use(express.urlencoded({ extended: true })); // ✅ parse form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 /* ======================
    Global Middlewares
@@ -19,6 +24,19 @@ app.use(cors({ origin: "*" }));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+
+/* ======================
+   Static Files - FIXED!
+====================== */
+// Serve files from 'public' folder
+app.use(express.static(path.join(__dirname, 'public'), {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.apk')) {
+            res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+            res.setHeader('Content-Disposition', 'attachment; filename="app-release.apk"');
+        }
+    }
+}));
 
 /* ======================
    API Routes
@@ -39,13 +57,6 @@ app.get("/health", (req, res) => {
 /* ======================
    Global Error Handler
 ====================== */
-app.use(express.static("../public", {
-    setHeaders: (res, path) => {
-        if (path.endsWith(".apk")) {
-            res.setHeader("Content-Type", "application/vnd.android.package-archive")
-        }
-    }
-}))
 app.use(errorHandler);
 
 export default app;
