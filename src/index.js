@@ -9,6 +9,14 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// ============================================
+// DEBUG: Check APK file path
+// ============================================
+console.log('📁 Current directory (__dirname):', __dirname);
+console.log('📁 Looking for APK at:', path.join(__dirname, '../public', 'app-release.apk'));
+console.log('📁 Full path:', path.resolve(__dirname, '../public', 'app-release.apk'));
+// ============================================
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -42,7 +50,10 @@ app.get('/app-release.apk', (req, res) => {
     const apkPath = path.join(__dirname, '../public', 'app-release.apk');
     res.download(apkPath, 'app-release.apk', (err) => {
         if (err) {
+            console.error('❌ Error downloading APK:', err);
             res.status(404).send('APK not found');
+        } else {
+            console.log('✅ APK downloaded successfully');
         }
     });
 });
@@ -64,4 +75,5 @@ app.get("/health", (req, res) => {
 app.listen(PORT, () => {
     console.log(`✅ Server running on http://localhost:${PORT}`);
     console.log(`✅ APK available at: http://localhost:${PORT}/app-release.apk`);
+    console.log(`✅ Health check at: http://localhost:${PORT}/health`);
 });
