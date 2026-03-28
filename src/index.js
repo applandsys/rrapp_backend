@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from 'url';
 
 // Get __dirname equivalent in ES modules
@@ -58,6 +59,28 @@ app.get('/app-release.apk', (req, res) => {
     });
 });
 
+// ============================================
+// CHECK APK FILE EXISTENCE
+// ============================================
+app.get('/check-apk', (req, res) => {
+    const apkPath = path.join(__dirname, '../public', 'app-release.apk');
+    try {
+        const exists = fs.existsSync(apkPath);
+        const stats = exists ? fs.statSync(apkPath) : null;
+        res.json({
+            path: apkPath,
+            exists: exists,
+            size: stats ? stats.size : 0,
+            message: exists ? 'APK file found' : 'APK file NOT found'
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.message,
+            path: apkPath
+        });
+    }
+});
+
 /* ======================
    Health Check
 ====================== */
@@ -76,4 +99,5 @@ app.listen(PORT, () => {
     console.log(`✅ Server running on http://localhost:${PORT}`);
     console.log(`✅ APK available at: http://localhost:${PORT}/app-release.apk`);
     console.log(`✅ Health check at: http://localhost:${PORT}/health`);
+    console.log(`✅ APK check at: http://localhost:${PORT}/check-apk`);
 });
