@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 async function startServer() {
     try {
         // simple DB test
-     //   await pool.query("SELECT 1");
+        await pool.query("SELECT 1");
         console.log("✅ Database check passed");
 
         app.listen(PORT, () => {
